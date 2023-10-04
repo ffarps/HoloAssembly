@@ -13,5 +13,6 @@ public class LoadScene : MonoBehaviour
     public void quitAppNow()
     {
         Application.Quit();
+        Debug.Log("Application Closed");
     }
 }
