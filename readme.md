@@ -5,11 +5,8 @@ A unity 3D app for Android, capable of displaying information on an AR overlayed
 
 Unity 2022.3.5f1
 
-Vuforia v 10.17 
+Vuforia v 10.17
 
 
 
-
-some Sound from Zapsplat.com
-
-
+Sounds from https://freesound.org/
