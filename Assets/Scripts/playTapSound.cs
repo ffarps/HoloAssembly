@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class playTapSound : MonoBehaviour
 {
-    public AudioClip clip;
+    public AudioClip tap;
     public AudioClip quit;
     public float volume = 1f;
-    public void PlaySound()
+    public void PlayTapSound()
     {
-        AudioSource.PlayClipAtPoint(clip, transform.position, volume);
+        AudioSource.PlayClipAtPoint(tap, transform.position, volume);
     }
-    public void QuitSound()
+    public void PlayQuitSound()
     {
         AudioSource.PlayClipAtPoint(quit, transform.position, volume);
     }
