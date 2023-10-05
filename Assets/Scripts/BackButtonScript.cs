@@ -7,17 +7,18 @@ using UnityEngine.SceneManagement;
 
 public class BackButtonScript : MonoBehaviour
 {
-    public GameObject confirmationPanel;
+    GameObject confirmationPanel;
     private bool ConfirmationPending = false;
     private void Update()
     {
-        if (ConfirmationPending && Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape) && SceneManager.GetActiveScene().name!="GUIScene")
         {
             ShowConfirmationPanel();
         }
     }
     private void ShowConfirmationPanel()
     {
+        Debug.LogWarning("SHOW!");
         confirmationPanel.SetActive(true);
         ConfirmationPending = true;
     }
