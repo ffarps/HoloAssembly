@@ -17,6 +17,7 @@ public class setActiveConfirmationPanel : MonoBehaviour
     private void Start()
     {
         //confirmationPanel.SetActive(false);
+        //Asyncloader = transform.GetComponent<AsyncSceneLoader>();
     }
     public void Update()
     {
@@ -31,6 +32,7 @@ public class setActiveConfirmationPanel : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "GUIScene")
         {
+          //  Asyncloader.LoadSceneButton("GUIScene");
             SceneManager.LoadScene("GUIScene");
         }
         confirmationPanel.SetActive(false);

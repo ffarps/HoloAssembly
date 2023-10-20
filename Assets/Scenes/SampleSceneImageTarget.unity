@@ -914,6 +914,7 @@ MonoBehaviour:
   MainCameraObject: {fileID: 963194228}
   distance: 10
   textMeshProUGUI: {fileID: 893528628}
+  highlightMaterial: {fileID: 2100000, guid: a710421b7a82851489a2e3804bbb3644, type: 2}
 --- !u!1 &1404655636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1486843876954185687, guid: 77220e6ea44cfcb42ba6692a93670a9b, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Interactive
       objectReference: {fileID: 0}
     - target: {fileID: 5468201774254878430, guid: 77220e6ea44cfcb42ba6692a93670a9b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1232,7 +1233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4990182922377619425, guid: 0a4ea0b8d879f9d489dde5bf996b65d6, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Interactive
       objectReference: {fileID: 0}
     - target: {fileID: 5804427763922875436, guid: 0a4ea0b8d879f9d489dde5bf996b65d6, type: 3}
       propertyPath: m_Materials.Array.data[0]

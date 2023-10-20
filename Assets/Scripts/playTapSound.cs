@@ -6,7 +6,7 @@ public class PlayTapSound : MonoBehaviour
 {
     public AudioClip tap;
     public AudioClip quit;
-    public float volume = 1f;
+    public float volume;
     public void PlayTapSoundNow()
     {
         AudioSource.PlayClipAtPoint(tap, transform.position, volume);
