@@ -914,7 +914,8 @@ MonoBehaviour:
   MainCameraObject: {fileID: 963194228}
   distance: 10
   textMeshProUGUI: {fileID: 893528628}
-  highlightMaterial: {fileID: 2100000, guid: a710421b7a82851489a2e3804bbb3644, type: 2}
+  highlightMaterial: {fileID: 10756, guid: 0000000000000000e000000000000000, type: 0}
+  originalMaterial: {fileID: 0}
 --- !u!1 &1404655636
 GameObject:
   m_ObjectHideFlags: 0
