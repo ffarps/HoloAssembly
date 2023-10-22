@@ -912,7 +912,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCameraObject: {fileID: 963194228}
-  distance: 10
   textMeshProUGUI: {fileID: 893528628}
   originalMaterial: {fileID: 0}
 --- !u!1 &1404655636
