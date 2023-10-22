@@ -17,17 +17,9 @@ public class InteractionManagerScript : MonoBehaviour
         //this will detect if the game object is hit by the ray
         if (Physics.Raycast(ray, out hit, distance))
         {
-            //estes ifs podem nao fazer sentido
-            if (outline != null)
-            {
-                if (outline.transform != hit.transform)
-                {
-                    outline = null;
-                }
-            }
             if (hit.transform.TryGetComponent<Outline>(out outline))
             {
-                while (outline.OutlineWidth < 10)
+                while (outline.OutlineWidth < 5)
                 {
                     outline.OutlineWidth++;
                 }
