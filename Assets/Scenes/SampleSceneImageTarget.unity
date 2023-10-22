@@ -914,7 +914,6 @@ MonoBehaviour:
   MainCameraObject: {fileID: 963194228}
   distance: 10
   textMeshProUGUI: {fileID: 893528628}
-  highlightMaterial: {fileID: 10756, guid: 0000000000000000e000000000000000, type: 0}
   originalMaterial: {fileID: 0}
 --- !u!1 &1404655636
 GameObject:
@@ -984,6 +983,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1678329779 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4069721465113711349, guid: de29c4c93d82eef4994c532bebe57a1e, type: 3}
+  m_PrefabInstance: {fileID: 5946485548800905272}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1678329780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678329779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1956961530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,7 +1284,15 @@ PrefabInstance:
       value: Interactive
       objectReference: {fileID: 0}
     - target: {fileID: 5900066153788489953, guid: de29c4c93d82eef4994c532bebe57a1e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5900066153788489953, guid: de29c4c93d82eef4994c532bebe57a1e, type: 3}
       propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9024c93b4da113e4c97467c572f9de2c, type: 2}
+    - target: {fileID: 5900066153788489953, guid: de29c4c93d82eef4994c532bebe57a1e, type: 3}
+      propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 9024c93b4da113e4c97467c572f9de2c, type: 2}
     - target: {fileID: 6183367320663569664, guid: de29c4c93d82eef4994c532bebe57a1e, type: 3}
@@ -1312,7 +1342,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4069721465113711349, guid: de29c4c93d82eef4994c532bebe57a1e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1678329780}
   m_SourcePrefab: {fileID: 100100000, guid: de29c4c93d82eef4994c532bebe57a1e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
