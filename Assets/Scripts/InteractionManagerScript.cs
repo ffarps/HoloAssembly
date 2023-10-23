@@ -16,6 +16,7 @@ public class InteractionManagerScript : MonoBehaviour
     GameObject HoveredObject;
     GameObject SelectedObject = null;
     bool hasAnyObjectBeenHovered = false;
+    bool disableOutline = false;
     void Update()
     {
         Ray ray = new Ray(MainCameraObject.position, MainCameraObject.forward);
@@ -58,10 +59,13 @@ public class InteractionManagerScript : MonoBehaviour
     }
     void OnHoverExit()
     {
-        textMeshProUGUI.text = "";
-        while (outline.OutlineWidth > 0)
+        if (disableOutline)
         {
-            outline.OutlineWidth--;
+            textMeshProUGUI.text = "";
+            while (outline.OutlineWidth > 0)
+            {
+                outline.OutlineWidth--;
+            }
         }
     }
     void Select(GameObject gameObject)
@@ -70,6 +74,7 @@ public class InteractionManagerScript : MonoBehaviour
         //SelectedObject = hit.collider.gameObject;
         SelectedObject = gameObject;
         Debug.LogWarning("Object " + SelectedObject.name + " Selected");
+        disableOutline = false;
     }
     void Deselect()
     {
@@ -82,6 +87,7 @@ public class InteractionManagerScript : MonoBehaviour
             }
             Debug.LogWarning("Object " + SelectedObject.name + " Deselected");
             SelectedObject = null;
+            disableOutline = true;
         }
 
     }
