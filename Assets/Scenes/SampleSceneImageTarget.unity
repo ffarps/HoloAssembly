@@ -913,7 +913,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainCameraObject: {fileID: 963194228}
   textMeshProUGUI: {fileID: 893528628}
-  originalMaterial: {fileID: 0}
 --- !u!1 &1404655636
 GameObject:
   m_ObjectHideFlags: 0

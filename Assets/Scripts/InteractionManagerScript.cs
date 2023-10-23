@@ -14,7 +14,7 @@ public class InteractionManagerScript : MonoBehaviour
     public Transform MainCameraObject;
     public TextMeshProUGUI textMeshProUGUI;
     GameObject HoveredObject;
-    GameObject SelectedObject;
+    GameObject SelectedObject = null;
     bool hasAnyObjectBeenHovered = false;
     void Update()
     {
@@ -22,36 +22,35 @@ public class InteractionManagerScript : MonoBehaviour
         Debug.DrawRay(MainCameraObject.position, -MainCameraObject.up * DistanceToObject, Color.green);
         RaycastHit hit;
         //this will detect if the game object is hit by the ray
-        if (Physics.Raycast(ray, out hit, DistanceToObject))
+        if (Physics.Raycast(ray, out hit, DistanceToObject) && hit.transform.TryGetComponent<Outline>(out outline))
         {
-            if (hit.transform.TryGetComponent<Outline>(out outline))
-                //action to be perform by selecting the Interactible object
-                OnHover(hit);
-            //Debug.Log("O objeto "+hit.transform.name+ " foi colidido");
+            OnHover(hit);
         }
         else if (hit.collider == null && hasAnyObjectBeenHovered)
         {
             OnHoverExit();
+            //Deselect();
         }
     }
     void OnHover(RaycastHit hit)
     {
-        
+        HoveredObject = hit.collider.gameObject;
+        while (outline.OutlineWidth < 5)
         {
-            while (outline.OutlineWidth < 5)
+            outline.OutlineWidth++;
+        }
+        hasAnyObjectBeenHovered = true;
+        textMeshProUGUI.text = HoveredObject.name;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (SelectedObject != HoveredObject)
             {
-                outline.OutlineWidth++;
+                Select(HoveredObject);
             }
-            hasAnyObjectBeenHovered = true;
-            textMeshProUGUI.text = hit.transform.name;
-            HoveredObject=hit.collider.gameObject;
-            if(Input.GetMouseButtonDown(0))
+            else
             {
-                Select(hit);
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Deselect(hit);
-                }
+                Deselect();
             }
         }
         /// to do
@@ -65,23 +64,25 @@ public class InteractionManagerScript : MonoBehaviour
             outline.OutlineWidth--;
         }
     }
-    void Select(RaycastHit hit)
+    void Select(GameObject gameObject)
     {
         //this is only called when the object is hovered an clicked to select
-        SelectedObject = hit.collider.gameObject;
-        Debug.LogWarning("Object "+SelectedObject.name+" Selected");
+        //SelectedObject = hit.collider.gameObject;
+        SelectedObject = gameObject;
+        Debug.LogWarning("Object " + SelectedObject.name + " Selected");
     }
-    void Deselect(RaycastHit hit)
+    void Deselect()
     {
         //this is only called when the object is hovered an clicked to deselect
-        if (SelectedObject!=null)
+        if (SelectedObject != null)
         {
             while (outline.OutlineWidth > 0)
             {
-            outline.OutlineWidth--;
+                outline.OutlineWidth--;
             }
+            Debug.LogWarning("Object " + SelectedObject.name + " Deselected");
             SelectedObject = null;
         }
-        Debug.LogWarning("Object " + SelectedObject.name + " deselected");
+
     }
 }
