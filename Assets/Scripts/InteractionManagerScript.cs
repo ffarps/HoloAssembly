@@ -2,7 +2,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class InteractionManagerScript : MonoBehaviour
 {
     /// <summary>
@@ -14,7 +13,7 @@ public class InteractionManagerScript : MonoBehaviour
     public Transform MainCameraObject;
     public TextMeshProUGUI textMeshProUGUI;
     GameObject HoveredObject;
-    GameObject SelectedObject = null;
+    GameObject SelectedObject;
     bool hasAnyObjectBeenHovered = false;
     bool disableOutline = false;
     void Update()
@@ -42,17 +41,23 @@ public class InteractionManagerScript : MonoBehaviour
         }
         hasAnyObjectBeenHovered = true;
         textMeshProUGUI.text = HoveredObject.name;
-
         if (Input.GetMouseButtonDown(0))
         {
+            //SelectedObject = HoveredObject;
             if (SelectedObject != HoveredObject)
             {
                 Select(HoveredObject);
+                disableOutline = false;
             }
             else
             {
                 Deselect();
+                disableOutline = true;
             }
+        }
+        else
+        {
+            disableOutline = true;
         }
         /// to do
         /// Database 
@@ -74,7 +79,6 @@ public class InteractionManagerScript : MonoBehaviour
         //SelectedObject = hit.collider.gameObject;
         SelectedObject = gameObject;
         Debug.LogWarning("Object " + SelectedObject.name + " Selected");
-        disableOutline = false;
     }
     void Deselect()
     {
@@ -87,8 +91,6 @@ public class InteractionManagerScript : MonoBehaviour
             }
             Debug.LogWarning("Object " + SelectedObject.name + " Deselected");
             SelectedObject = null;
-            disableOutline = true;
         }
-
     }
 }
