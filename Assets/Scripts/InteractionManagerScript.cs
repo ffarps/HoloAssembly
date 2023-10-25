@@ -8,86 +8,83 @@ public class InteractionManagerScript : MonoBehaviour
     /// This class handles the interaction between objects and a cast ray
     /// ffarps October 2023
     /// </summary>
-    Outline outline;
-    float DistanceToObject = 10f;
     public Transform MainCameraObject;
     public TextMeshProUGUI textMeshProUGUI;
+    public float maxOutlineWitdh = 10f;
+    readonly float DistanceToObject = 10f;
+    ObjectState ObjectState;
+    Outline outline;
     GameObject HoveredObject;
     GameObject SelectedObject;
-    bool hasAnyObjectBeenHovered = false;
     bool disableOutline = false;
     void Update()
     {
         Ray ray = new Ray(MainCameraObject.position, MainCameraObject.forward);
         Debug.DrawRay(MainCameraObject.position, -MainCameraObject.up * DistanceToObject, Color.green);
         RaycastHit hit;
-        //this will detect if the game object is hit by the ray
         if (Physics.Raycast(ray, out hit, DistanceToObject) && hit.transform.TryGetComponent<Outline>(out outline))
         {
             OnHover(hit);
         }
-        else if (hit.collider == null && hasAnyObjectBeenHovered)
+        else if (hit.collider == null && HoveredObject != null)
         {
             OnHoverExit();
-            //Deselect();
         }
     }
     void OnHover(RaycastHit hit)
     {
-        HoveredObject = hit.collider.gameObject;
-        while (outline.OutlineWidth < 5)
+        GameObject newHoveredObject = hit.collider.gameObject;
+        if (HoveredObject != newHoveredObject)
         {
-            outline.OutlineWidth++;
+            HoveredObject = newHoveredObject;
+            textMeshProUGUI.text = HoveredObject.name;
+            disableOutline = false;
         }
-        hasAnyObjectBeenHovered = true;
-        textMeshProUGUI.text = HoveredObject.name;
         if (Input.GetMouseButtonDown(0))
         {
-            //SelectedObject = HoveredObject;
             if (SelectedObject != HoveredObject)
             {
                 Select(HoveredObject);
-                disableOutline = false;
             }
             else
             {
                 Deselect();
-                disableOutline = true;
             }
         }
         else
         {
             disableOutline = true;
         }
-        /// to do
-        /// Database 
     }
     void OnHoverExit()
     {
         if (disableOutline)
         {
             textMeshProUGUI.text = "";
-            while (outline.OutlineWidth > 0)
-            {
-                outline.OutlineWidth--;
-            }
+            outline.OutlineWidth = 0;
         }
     }
     void Select(GameObject gameObject)
     {
-        //this is only called when the object is hovered an clicked to select
-        //SelectedObject = hit.collider.gameObject;
         SelectedObject = gameObject;
-        Debug.LogWarning("Object " + SelectedObject.name + " Selected");
+        ObjectState objectState = gameObject.GetComponent<ObjectState>();
+        if (objectState != null)
+        {
+            objectState.IsObjectSelected = true;
+            Debug.LogWarning("Object " + SelectedObject.name + " Selected");
+        }
+        /// to do
+        /// Database 
     }
     void Deselect()
     {
-        //this is only called when the object is hovered an clicked to deselect
         if (SelectedObject != null)
         {
-            while (outline.OutlineWidth > 0)
+            outline.OutlineWidth = 0;
+            ObjectState objectState = gameObject.GetComponent<ObjectState>();
+            if (objectState != null)
             {
-                outline.OutlineWidth--;
+                objectState.IsObjectSelected = false;
             }
             Debug.LogWarning("Object " + SelectedObject.name + " Deselected");
             SelectedObject = null;
