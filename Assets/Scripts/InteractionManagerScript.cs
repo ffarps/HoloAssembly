@@ -8,13 +8,21 @@ public class InteractionManagerScript : MonoBehaviour
     /// This class handles the interaction between objects and a cast ray
     /// ffarps October 2023
     /// </summary>
+    [Header("GameObjects to attach")]
     public Transform MainCameraObject;
+    [Header("GameObjects (to not attach)")]
+    public ObjectState objectState;
+    public Outline outline;
+    public GameObject HoveredObject;
+    public GameObject SelectedObject;
+    [Header("Text Mesh Pro UI to attach")]
     public TextMeshProUGUI textMeshProUGUI;
-    readonly float DistanceToObject = 10f;
-    ObjectState objectState;
-    Outline outline;
-    GameObject HoveredObject;
-    GameObject SelectedObject;
+    public TextMeshProUGUI selectionInfo;
+    [Header("Values that can be modified")]
+    public float DistanceToObject = 10f;
+    public short minOutlineWidth=0;
+    public short maxOutlineWidth=5;
+    
     void Update()
     {
         Ray ray = new Ray(MainCameraObject.position, MainCameraObject.forward);
@@ -32,7 +40,7 @@ public class InteractionManagerScript : MonoBehaviour
     void OnHover(RaycastHit hit)
     {
         HoveredObject = hit.collider.gameObject;
-        outline.OutlineWidth = 5;
+        outline.OutlineWidth = maxOutlineWidth;
         if (HoveredObject != null)
         {
             textMeshProUGUI.text = HoveredObject.name;
@@ -65,13 +73,13 @@ public class InteractionManagerScript : MonoBehaviour
         if (objectState.IsObjectSelected == false)
         {
             textMeshProUGUI.text = "";
-            outline.OutlineWidth = 0;
+            outline.OutlineWidth = minOutlineWidth;
             HoveredObject = null;
         }
         else
         {
             textMeshProUGUI.text = "";
-            outline.OutlineWidth = 5;
+            outline.OutlineWidth = maxOutlineWidth;
             HoveredObject = null;
         }
     }
@@ -102,7 +110,7 @@ public class InteractionManagerScript : MonoBehaviour
             if (objectState != null)
             {
                 objectState.IsObjectSelected = false;
-                outline.OutlineWidth = 0;
+                outline.OutlineWidth = minOutlineWidth;
             }
             SelectedObject = null;
         }
