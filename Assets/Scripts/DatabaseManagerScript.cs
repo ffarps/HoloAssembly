@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.IO;
+using SQLite4Unity3d;
 
 public class DatabaseManagerScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private SQLiteConnection _connection;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        // Specify the database file path
+        string databasePath = Path.Combine(Application.persistentDataPath, "myHolodatabase.db");
+        //Debug.Log(Application.persistentDataPath);
+
+        // Initialize the database connection
+        _connection = new SQLiteConnection(databasePath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
+
+        // Create a table (if it doesn't exist)
+        _connection.CreateTable<HoloDataBase>();
     }
 }
