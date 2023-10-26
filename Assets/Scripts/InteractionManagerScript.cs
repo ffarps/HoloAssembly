@@ -63,7 +63,7 @@ public class InteractionManagerScript : MonoBehaviour
         }
         else
         {
-            ///
+            Debug.LogWarning("Hovered Object is non existant");
         }
 
     }
