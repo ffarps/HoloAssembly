@@ -11,11 +11,10 @@ public class InteractionManagerScript : MonoBehaviour
     public Transform MainCameraObject;
     public TextMeshProUGUI textMeshProUGUI;
     readonly float DistanceToObject = 10f;
-    ObjectState ObjectState;
+    ObjectState objectState;
     Outline outline;
     GameObject HoveredObject;
     GameObject SelectedObject;
-    bool disableOutline = false;
     void Update()
     {
         Ray ray = new Ray(MainCameraObject.position, MainCameraObject.forward);
@@ -27,7 +26,7 @@ public class InteractionManagerScript : MonoBehaviour
         }
         else if (hit.collider == null && HoveredObject != null)
         {
-            OnHoverExit();
+            OnHoverExit(HoveredObject);
         }
     }
     void OnHover(RaycastHit hit)
@@ -37,7 +36,7 @@ public class InteractionManagerScript : MonoBehaviour
         if (HoveredObject != null)
         {
             textMeshProUGUI.text = HoveredObject.name;
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))///this is not questioning if the object is selected
             {
                 SelectedObject = gameObject;
                 if (SelectedObject != HoveredObject)
@@ -51,33 +50,40 @@ public class InteractionManagerScript : MonoBehaviour
             }
             else
             {
-                disableOutline = true;
+                ///
             }
         }
         else
         {
+            ///
         }
 
     }
-    void OnHoverExit()
+    void OnHoverExit(GameObject HoveredObject)
     {
-        //   if (disableOutline)
+        objectState = HoveredObject.GetComponent<ObjectState>();
+        if (objectState.IsObjectSelected == false)
         {
             textMeshProUGUI.text = "";
             outline.OutlineWidth = 0;
+            HoveredObject = null;
+        }
+        else
+        {
+            textMeshProUGUI.text = "";
+            outline.OutlineWidth = 5;
             HoveredObject = null;
         }
     }
     void Select(GameObject gameObject)
     {
         SelectedObject = gameObject;
-        ObjectState objectState = gameObject.GetComponent<ObjectState>();
+        objectState = gameObject.GetComponent<ObjectState>();
         if (objectState.IsObjectSelected != true)
         {
             if (objectState != null)
             {
                 objectState.IsObjectSelected = true;
-                disableOutline = false;
             }
         }
         else
@@ -90,16 +96,15 @@ public class InteractionManagerScript : MonoBehaviour
     void Deselect(GameObject gameObject)
     {
         SelectedObject = gameObject;
-        ObjectState objectState = gameObject.GetComponent<ObjectState>();
+        objectState = gameObject.GetComponent<ObjectState>();
         if (SelectedObject != null)
         {
-            outline.OutlineWidth = 0;
             if (objectState != null)
             {
                 objectState.IsObjectSelected = false;
+                outline.OutlineWidth = 0;
             }
             SelectedObject = null;
-            disableOutline = true;
         }
     }
 }
