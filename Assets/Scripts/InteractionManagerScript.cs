@@ -8,6 +8,8 @@ public class InteractionManagerScript : MonoBehaviour
     /// This class handles the interaction between objects and a cast ray
     /// ffarps October 2023
     /// </summary>
+    /// 
+    public DatabaseManagerScript Database;
     [Header("GameObjects to attach")]
     public Transform MainCameraObject;
     [Header("GameObjects (to not attach)")]
@@ -23,9 +25,10 @@ public class InteractionManagerScript : MonoBehaviour
     public Color GazeColor = new(254, 102, 1);
     [Header("Values that can be modified")]
     public float DistanceToObject = 10f;
-    public short minOutlineWidth=0;
-    public short maxOutlineWidth=5;
-    
+    public short minOutlineWidth = 0;
+    public short maxOutlineWidth = 5;
+
+
     void Update()
     {
         Ray ray = new Ray(MainCameraObject.position, MainCameraObject.forward);
@@ -97,6 +100,13 @@ public class InteractionManagerScript : MonoBehaviour
             if (objectState != null)
             {
                 objectState.IsObjectSelected = true;
+                HoloDataBase dataBase = new HoloDataBase
+                {
+                    IsSelected = objectState.IsObjectSelected,
+                    HoloName = gameObject.name,
+                    HoloZone = "Zone 1"
+                };
+                Database._connection.Insert(dataBase);
             }
         }
         else
