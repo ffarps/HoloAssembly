@@ -1,7 +1,7 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class InteractionManagerScript : MonoBehaviour
 {
     /// <summary>
@@ -18,6 +18,9 @@ public class InteractionManagerScript : MonoBehaviour
     [Header("Text Mesh Pro UI to attach")]
     public TextMeshProUGUI textMeshProUGUI;
     public TextMeshProUGUI selectionInfo;
+    public Image GazeCursor;
+    public Color originalGazeColor = new(255, 255, 255);
+    public Color GazeColor = new(254, 102, 1);
     [Header("Values that can be modified")]
     public float DistanceToObject = 10f;
     public short minOutlineWidth=0;
@@ -69,6 +72,7 @@ public class InteractionManagerScript : MonoBehaviour
     }
     void OnHoverExit(GameObject HoveredObject)
     {
+        GazeCursor.color = originalGazeColor;
         objectState = HoveredObject.GetComponent<ObjectState>();
         if (objectState.IsObjectSelected == false)
         {
@@ -85,6 +89,7 @@ public class InteractionManagerScript : MonoBehaviour
     }
     void Select(GameObject gameObject)
     {
+        GazeCursor.color = GazeColor;
         SelectedObject = gameObject;
         objectState = gameObject.GetComponent<ObjectState>();
         if (objectState.IsObjectSelected != true)
@@ -103,6 +108,7 @@ public class InteractionManagerScript : MonoBehaviour
     }
     void Deselect(GameObject gameObject)
     {
+        GazeCursor.color = originalGazeColor;
         SelectedObject = gameObject;
         objectState = gameObject.GetComponent<ObjectState>();
         if (SelectedObject != null)
