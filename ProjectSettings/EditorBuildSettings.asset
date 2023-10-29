@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleSceneImageTarget.unity
     guid: f4f79536759996c4f9105fbddc283deb
+  - enabled: 1
+    path: Assets/Scenes/HoloCarScene.unity
+    guid: 36339a0416cf3974abf46305022a4b9c
   m_configObjects: {}
