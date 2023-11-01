@@ -100,21 +100,31 @@ public class InteractionManagerScript : MonoBehaviour
             if (objectState != null)
             {
                 objectState.IsObjectSelected = true;
-                HoloDataBase dataBase = new HoloDataBase
+                var QueryRecord = Database._connection.Table<HoloDataBase>().Where(name => name.HoloName == objectState.name).FirstOrDefault();
+                if (QueryRecord != null)
                 {
-                    IsSelected = objectState.IsObjectSelected,
-                    HoloName = gameObject.name,
-                    HoloZone = "Zone 1"
-                };
-                Database._connection.Insert(dataBase);
+                    QueryRecord.IsSelected = objectState.IsObjectSelected;
+                    Database._connection.Update(QueryRecord);
+                }
+                else
+                {
+                    //if object is not stored at database, create a new one of type HoloDataBase
+                    HoloDataBase NewRecorddataBase = new HoloDataBase
+                    {
+                        IsSelected = objectState.IsObjectSelected,
+                        HoloName = gameObject.name,
+                        HoloZone = "Zone 1"
+                    };
+                    Database._connection.Insert(NewRecorddataBase);
+                }
+                //introduzir nomes dos objetos selectionados (\n), assim como informacoes dos carro
+                //selectionInfo.text += gameObject.name + " | "+objectState.IsObjectSelected+"\n";
             }
         }
         else
         {
             Deselect(gameObject);
         }
-        /// to do
-        /// Database 
     }
     void Deselect(GameObject gameObject)
     {
@@ -127,6 +137,13 @@ public class InteractionManagerScript : MonoBehaviour
             {
                 objectState.IsObjectSelected = false;
                 outline.OutlineWidth = minOutlineWidth;
+                //deselect in database
+                var IsObjSelected = Database._connection.Table<HoloDataBase>().Where(name => name.HoloName == objectState.name).FirstOrDefault();
+                if (IsObjSelected != null)
+                {
+                    IsObjSelected.IsSelected = objectState.IsObjectSelected;
+                    Database._connection.Update(IsObjSelected);
+                }
             }
             SelectedObject = null;
         }
