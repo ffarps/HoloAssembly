@@ -108,6 +108,7 @@ public class InteractionManagerScript : MonoBehaviour
                 }
                 else
                 {
+                    Debug.LogWarning("no value stored!");
                     //if object is not stored at database, create a new one of type HoloDataBase
                     HoloDataBase NewRecorddataBase = new HoloDataBase
                     {
@@ -118,7 +119,7 @@ public class InteractionManagerScript : MonoBehaviour
                     Database._connection.Insert(NewRecorddataBase);
                 }
                 //introduzir nomes dos objetos selectionados (\n), assim como informacoes dos carro
-                //selectionInfo.text += gameObject.name + " | "+objectState.IsObjectSelected+"\n";
+                selectionInfo.text += gameObject.name + "\n";
             }
         }
         else
