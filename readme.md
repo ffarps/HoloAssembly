@@ -17,6 +17,8 @@ Sounds from https://freesound.org/
 - [ ] fix "Not allowed to access normals on mesh 'battery' (isReadable is false; Read/Write must be enabled in import settings)"
 - [ ] improve UI scaling so that when the phone rotates, the width will be bigger than the heigh, so the ui must change, with the logo on the left, and the Buttons on the right.
 - [ ] improve UI and Logo
+- [ ] implement text mesh pro "loading... (finding Model/image)"
+- [ ] implement a text mesh in the middle of the screen (above the Gaze) that says Looking for Image/Object (it varies whether it's an image or an object)
 
 
 ### Results:
