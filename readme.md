@@ -9,4 +9,12 @@ Vuforia v 10.17
 
 Sounds from https://freesound.org/
 
-Results:(youtube video)
+### Future Work
+
+### Results:
+#### App running in the Unity Editor:
+https://youtu.be/8Fu11Rj5KjE
+#### App running in an Android phone using a Image target (marker) 
+https://youtu.be/hcyNxq3MUTk
+#### App running in an Android phone using a Model target (Cad tracking) 
+https://youtu.be/_uyqvXNGZjE
