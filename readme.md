@@ -10,7 +10,7 @@ Vuforia v 10.17
 Sounds from https://freesound.org/
 
 ### Future Work
-- [ ] fix the bug that when the gaze hovers other object the outline stays on
+- [ ] fix a bug that when the gaze hovers other object the outline stays on
 - [ ] in starting the scene with the AR simulator verufy if any object is already marked as selected in the database so the outline is on
 - [ ] fix the issue when there is no value stored in the database the connection to the database is not Working (it has something to do with the update method)
 - [ ] fix "Not allowed to access vertices on mesh 'Windscreen washer reservoir' (isReadable is false; Read/Write must be enabled in import settings)"
